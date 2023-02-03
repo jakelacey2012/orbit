@@ -75,6 +75,13 @@ defmodule OrbitWeb.Router do
   scope "/", OrbitWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    live "/boards", BoardLive.Index, :index
+    live "/boards/new", BoardLive.Index, :new
+    live "/boards/:id/edit", BoardLive.Index, :edit
+
+    live "/boards/:id", BoardLive.Show, :show
+    live "/boards/:id/show/edit", BoardLive.Show, :edit
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
