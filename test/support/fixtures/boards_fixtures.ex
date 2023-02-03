@@ -17,4 +17,18 @@ defmodule Orbit.BoardsFixtures do
 
     board
   end
+
+  @doc """
+  Generate a column.
+  """
+  def column_fixture(attrs \\ %{}) do
+    {:ok, column} =
+      attrs
+      |> Enum.into(%{
+        name: "some name"
+      })
+      |> Orbit.Boards.create_column()
+
+    column
+  end
 end

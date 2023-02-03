@@ -82,6 +82,14 @@ defmodule OrbitWeb.Router do
     live "/boards/:id", BoardLive.Show, :show
     live "/boards/:id/show/edit", BoardLive.Show, :edit
 
+    # This needs to be under board
+    live "/columns", ColumnLive.Index, :index
+    live "/columns/new", ColumnLive.Index, :new
+    live "/columns/:id/edit", ColumnLive.Index, :edit
+
+    live "/columns/:id", ColumnLive.Show, :show
+    live "/columns/:id/show/edit", ColumnLive.Show, :edit
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email
