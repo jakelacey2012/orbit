@@ -90,6 +90,13 @@ defmodule OrbitWeb.Router do
     live "/columns/:id", ColumnLive.Show, :show
     live "/columns/:id/show/edit", ColumnLive.Show, :edit
 
+    live "/cards", CardsLive.Index, :index
+    live "/cards/new", CardsLive.Index, :new
+    live "/cards/:id/edit", CardsLive.Index, :edit
+
+    live "/cards/:id", CardsLive.Show, :show
+    live "/cards/:id/show/edit", CardsLive.Show, :edi
+
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email

@@ -1,0 +1,26 @@
+<h1>Show Cards</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.cards_show_path(@socket, :show, @cards)}>
+    <.live_component
+      module={OrbitWeb.CardsLive.FormComponent}
+      id={@cards.id}
+      title={@page_title}
+      action={@live_action}
+      cards={@cards}
+      return_to={Routes.cards_show_path(@socket, :show, @cards)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @cards.title %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.cards_show_path(@socket, :edit, @cards), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.cards_index_path(@socket, :index) %></span>

@@ -31,4 +31,18 @@ defmodule Orbit.BoardsFixtures do
 
     column
   end
+
+  @doc """
+  Generate a cards.
+  """
+  def cards_fixture(attrs \\ %{}) do
+    {:ok, cards} =
+      attrs
+      |> Enum.into(%{
+        title: "some title"
+      })
+      |> Orbit.Boards.create_cards()
+
+    cards
+  end
 end
