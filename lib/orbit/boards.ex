@@ -127,7 +127,7 @@ defmodule Orbit.Boards do
 
   """
   def list_columns(board_id) do
-    Repo.all(from c in Column, where: ^board_id == c.board_id)
+    Repo.all(from c in Column, where: ^board_id == c.board_id) |> Repo.preload(:cards)
   end
 
   @doc """
@@ -224,6 +224,32 @@ defmodule Orbit.Boards do
   """
   def list_cards do
     Repo.all(Card)
+  end
+
+  @doc """
+  Returns the list of cards by board
+
+  ## Examples
+
+      iex> list_cards(1)
+      [%Card{}, ...]
+
+  """
+  def list_cards(board_id) do
+    Repo.all(from c in Column, where: ^board_id == c.board_id)
+  end
+
+  @doc """
+  Returns the list of cards by board and column
+
+  ## Examples
+
+      iex> list_cards(1, 1)
+      [%Card{}, ...]
+
+  """
+  def list_cards(board_id, column_id) do
+    Repo.all(from c in Column, where: ^board_id == c.board_id and ^column_id == c.id)
   end
 
   @doc """

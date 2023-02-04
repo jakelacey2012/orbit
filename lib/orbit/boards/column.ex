@@ -6,7 +6,10 @@ defmodule Orbit.Boards.Column do
   @foreign_key_type :binary_id
   schema "columns" do
     field :name, :string
-    field :board_id, :binary_id
+
+    #    field :board_id, :binary_id
+    belongs_to :board, Orbit.Boards.Board
+    has_many :cards, Orbit.Boards.Card
 
     timestamps()
   end
@@ -14,7 +17,7 @@ defmodule Orbit.Boards.Column do
   @doc false
   def changeset(column, attrs) do
     column
-    |> cast(attrs, [:name])
+    |> cast(attrs, [:name, :board_id])
     |> validate_required([:name])
   end
 end

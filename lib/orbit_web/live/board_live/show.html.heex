@@ -1,6 +1,6 @@
 <h1>Show Board</h1>
 
-#<%= if @live_action in [:edit] do %>
+<%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.board_show_path(@socket, :show, @board)}>
     <.live_component
       module={OrbitWeb.BoardLive.FormComponent}
@@ -13,15 +13,68 @@
   </.modal>
 <% end %>
 
-<ul>
+<%= if @live_action in [:new_column, :edit_column] do %>
+  <.modal return_to={Routes.board_show_path(@socket, :show, @board)}>
+    <.live_component
+      module={OrbitWeb.ColumnLive.FormComponent}
+      id={@column.id || :new}
+      title={@page_title}
+      action={@live_action}
+      column={@column}
+      board={@board}
+      return_to={Routes.board_show_path(@socket, :show, @board)}
+    />
+  </.modal>
+<% end %>
 
+<%= if @live_action in [:new_card, :edit_card] do %>
+  <.modal return_to={Routes.board_show_path(@socket, :show, @board)}>
+    <.live_component
+    module={OrbitWeb.CardLive.FormComponent}
+    id={@card.id || :new}
+    title={@page_title}
+    action={@live_action}
+    card={@card}
+    column={@column}
+    board={@board}
+    return_to={Routes.board_show_path(@socket, :show, @board)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
   <li>
     <strong>Name:</strong>
     <%= @board.name %>
   </li>
 </ul>
 
-<span><%= live_patch "New Column", to: Routes.column_index_path(@socket, :new, @board.id) %></span>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
 
+    <th></th>
+  </tr>
+  </thead>
+  <tbody id="columns">
+  <%= for column <- @columns do %>
+  <tr id={"column-#{column.id}"}>
+    <td><%= column.name %></td>
+    <td>    <%= for card <- column.cards do %>
+      <li> <%= card.title %> </li>
+      <% end %></td>
+
+    <td>
+      <span><%= live_patch "Add Card", to: Routes.board_show_path(@socket, :new_card, @board, column) %></span>
+      <span><%= live_patch "Edit", to: Routes.board_show_path(@socket, :edit_column, @board.id, column) %></span>
+      <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: column.id, data: [confirm: "Are you sure?"] %></span>
+    </td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Column", to: Routes.board_show_path(@socket, :new_column, @board) %></span>
 <span><%= live_patch "Edit", to: Routes.board_show_path(@socket, :edit, @board), class: "button" %></span> |
 <span><%= live_redirect "Back", to: Routes.board_index_path(@socket, :index) %></span>

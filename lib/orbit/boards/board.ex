@@ -7,6 +7,9 @@ defmodule Orbit.Boards.Board do
   schema "boards" do
     field :name, :string
 
+    has_many :columns, Orbit.Boards.Column
+    has_many :cards, Orbit.Boards.Card
+
     timestamps()
   end
 

@@ -27,7 +27,7 @@ defmodule OrbitWeb.CardLive.FormComponent do
     save_card(socket, socket.assigns.action, card_params)
   end
 
-  defp save_card(socket, :edit, card_params) do
+  defp save_card(socket, :edit_card, card_params) do
     case Boards.update_card(socket.assigns.card, card_params) do
       {:ok, _card} ->
         {:noreply,
@@ -40,7 +40,7 @@ defmodule OrbitWeb.CardLive.FormComponent do
     end
   end
 
-  defp save_card(socket, :new, card_params) do
+  defp save_card(socket, :new_card, card_params) do
     case Boards.create_card(card_params) do
       {:ok, _card} ->
         {:noreply,

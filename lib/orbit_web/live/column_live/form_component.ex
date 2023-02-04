@@ -27,7 +27,7 @@ defmodule OrbitWeb.ColumnLive.FormComponent do
     save_column(socket, socket.assigns.action, column_params)
   end
 
-  defp save_column(socket, :edit, column_params) do
+  defp save_column(socket, :edit_column, column_params) do
     case Boards.update_column(socket.assigns.column, column_params) do
       {:ok, _column} ->
         {:noreply,
@@ -40,7 +40,7 @@ defmodule OrbitWeb.ColumnLive.FormComponent do
     end
   end
 
-  defp save_column(socket, :new, column_params) do
+  defp save_column(socket, :new_column, column_params) do
     case Boards.create_column(column_params) do
       {:ok, _column} ->
         {:noreply,

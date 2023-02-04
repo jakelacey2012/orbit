@@ -6,8 +6,11 @@ defmodule Orbit.Boards.Card do
   @foreign_key_type :binary_id
   schema "cards" do
     field :title, :string
-    field :board_id, :binary_id
-    field :column_id, :binary_id
+
+    #    field :board_id, :binary_id
+    belongs_to :board, Orbit.Boards.Board
+    #    field :column_id, :binary_id
+    belongs_to :column, Orbit.Boards.Card
 
     timestamps()
   end
@@ -15,7 +18,7 @@ defmodule Orbit.Boards.Card do
   @doc false
   def changeset(card, attrs) do
     card
-    |> cast(attrs, [:title])
+    |> cast(attrs, [:title, :board_id, :column_id])
     |> validate_required([:title])
   end
 end

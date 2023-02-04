@@ -82,19 +82,20 @@ defmodule OrbitWeb.Router do
     live "/boards/:board_id", BoardLive.Show, :show
     live "/boards/:board_id/show/edit", BoardLive.Show, :edit
 
-    live "/boards/:board_id/columns", ColumnLive.Index, :index
-    live "/boards/:board_id/columns/new", ColumnLive.Index, :new
-    live "/boards/:board_id/columns/:column_id/edit", ColumnLive.Index, :edit
+#    live "/boards/:board_id/columns", ColumnLive.Index, :index
+    live "/boards/:board_id/columns/new", BoardLive.Show, :new_column
+    live "/boards/:board_id/columns/:column_id/edit", BoardLive.Show, :edit_column
+    live "/boards/:board_id/columns/:column_id/cards/new", BoardLive.Show, :new_card
+#
 
-    live "/boards/:board_id/columns/:column_id", ColumnLive.Show, :show
-    live "/boards/:board_id/columns/:column_id/show/edit", ColumnLive.Show, :edit
-
-    live "/boards/:board_id/columns/:column_id/cards", CardLive.Index, :index
-    live "/boards/:board_id/columns/:column_id/cards/new", CardLive.Index, :new
-    live "/boards/:board_id/columns/:column_id/cards/:id/edit", CardLive.Index, :edit
-
-    live "/boards/:board_id/columns/:column_id/cards/:id", CardLive.Show, :show
-    live "/boards/:board_id/columns/:column_id/cards/:id/show/edit", CardLive.Show, :edit
+#    live "/boards/:board_id/columns/:column_id/show/edit", ColumnLive.Show, :edit
+#
+#    live "/boards/:board_id/columns/:column_id/cards", CardLive.Index, :index
+#    live "/boards/:board_id/columns/:column_id/cards/new", CardLive.Index, :new
+#    live "/boards/:board_id/columns/:column_id/cards/:id/edit", CardLive.Index, :edit
+#
+#    live "/boards/:board_id/columns/:column_id/cards/:id", CardLive.Show, :show
+#    live "/boards/:board_id/columns/:column_id/cards/:id/show/edit", CardLive.Show, :edit
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update
