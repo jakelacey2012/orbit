@@ -118,6 +118,19 @@ defmodule Orbit.Boards do
   end
 
   @doc """
+  Returns the list of columns by board_id
+
+  ## Examples
+
+      iex> list_columns(board_id)
+      [%Column{}, ...]
+
+  """
+  def list_columns(board_id) do
+    Repo.all(from c in Column, where: ^board_id == c.board_id)
+  end
+
+  @doc """
   Gets a single column.
 
   Raises `Ecto.NoResultsError` if the Column does not exist.
@@ -198,7 +211,7 @@ defmodule Orbit.Boards do
     Column.changeset(column, attrs)
   end
 
-  alias Orbit.Boards.Cards
+  alias Orbit.Boards.Card
 
   @doc """
   Returns the list of cards.
@@ -206,91 +219,91 @@ defmodule Orbit.Boards do
   ## Examples
 
       iex> list_cards()
-      [%Cards{}, ...]
+      [%Card{}, ...]
 
   """
   def list_cards do
-    Repo.all(Cards)
+    Repo.all(Card)
   end
 
   @doc """
-  Gets a single cards.
+  Gets a single card.
 
-  Raises `Ecto.NoResultsError` if the Cards does not exist.
+  Raises `Ecto.NoResultsError` if the Card does not exist.
 
   ## Examples
 
-      iex> get_cards!(123)
-      %Cards{}
+      iex> get_card!(123)
+      %Card{}
 
-      iex> get_cards!(456)
+      iex> get_card!(456)
       ** (Ecto.NoResultsError)
 
   """
-  def get_cards!(id), do: Repo.get!(Cards, id)
+  def get_card!(id), do: Repo.get!(Card, id)
 
   @doc """
-  Creates a cards.
+  Creates a card.
 
   ## Examples
 
-      iex> create_cards(%{field: value})
-      {:ok, %Cards{}}
+      iex> create_card(%{field: value})
+      {:ok, %Card{}}
 
-      iex> create_cards(%{field: bad_value})
+      iex> create_card(%{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_cards(attrs \\ %{}) do
-    %Cards{}
-    |> Cards.changeset(attrs)
+  def create_card(attrs \\ %{}) do
+    %Card{}
+    |> Card.changeset(attrs)
     |> Repo.insert()
   end
 
   @doc """
-  Updates a cards.
+  Updates a card.
 
   ## Examples
 
-      iex> update_cards(cards, %{field: new_value})
-      {:ok, %Cards{}}
+      iex> update_card(card, %{field: new_value})
+      {:ok, %Card{}}
 
-      iex> update_cards(cards, %{field: bad_value})
+      iex> update_card(card, %{field: bad_value})
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_cards(%Cards{} = cards, attrs) do
-    cards
-    |> Cards.changeset(attrs)
+  def update_card(%Card{} = card, attrs) do
+    card
+    |> Card.changeset(attrs)
     |> Repo.update()
   end
 
   @doc """
-  Deletes a cards.
+  Deletes a card.
 
   ## Examples
 
-      iex> delete_cards(cards)
-      {:ok, %Cards{}}
+      iex> delete_card(card)
+      {:ok, %Card{}}
 
-      iex> delete_cards(cards)
+      iex> delete_card(card)
       {:error, %Ecto.Changeset{}}
 
   """
-  def delete_cards(%Cards{} = cards) do
-    Repo.delete(cards)
+  def delete_card(%Card{} = card) do
+    Repo.delete(card)
   end
 
   @doc """
-  Returns an `%Ecto.Changeset{}` for tracking cards changes.
+  Returns an `%Ecto.Changeset{}` for tracking card changes.
 
   ## Examples
 
-      iex> change_cards(cards)
-      %Ecto.Changeset{data: %Cards{}}
+      iex> change_card(card)
+      %Ecto.Changeset{data: %Card{}}
 
   """
-  def change_cards(%Cards{} = cards, attrs \\ %{}) do
-    Cards.changeset(cards, attrs)
+  def change_card(%Card{} = card, attrs \\ %{}) do
+    Card.changeset(card, attrs)
   end
 end

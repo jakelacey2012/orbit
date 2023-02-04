@@ -14,7 +14,7 @@ defmodule OrbitWeb.ColumnLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
+  defp apply_action(socket, :edit, %{"column_id" => id}) do
     socket
     |> assign(:page_title, "Edit Column")
     |> assign(:column, Boards.get_column!(id))
@@ -33,7 +33,7 @@ defmodule OrbitWeb.ColumnLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", %{"column_id" => id}, socket) do
     column = Boards.get_column!(id)
     {:ok, _} = Boards.delete_column(column)
 

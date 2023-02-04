@@ -1,4 +1,4 @@
-defmodule Orbit.Boards.Cards do
+defmodule Orbit.Boards.Card do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -13,8 +13,8 @@ defmodule Orbit.Boards.Cards do
   end
 
   @doc false
-  def changeset(cards, attrs) do
-    cards
+  def changeset(card, attrs) do
+    card
     |> cast(attrs, [:title])
     |> validate_required([:title])
   end

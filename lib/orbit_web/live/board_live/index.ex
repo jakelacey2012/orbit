@@ -14,7 +14,7 @@ defmodule OrbitWeb.BoardLive.Index do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
-  defp apply_action(socket, :edit, %{"id" => id}) do
+  defp apply_action(socket, :edit, %{"board_id" => id}) do
     socket
     |> assign(:page_title, "Edit Board")
     |> assign(:board, Boards.get_board!(id))
@@ -33,7 +33,7 @@ defmodule OrbitWeb.BoardLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
+  def handle_event("delete", %{"board_id" => id}, socket) do
     board = Boards.get_board!(id)
     {:ok, _} = Boards.delete_board(board)
 

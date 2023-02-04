@@ -1,12 +1,12 @@
-defmodule OrbitWeb.CardsLive.Index do
+defmodule OrbitWeb.CardLive.Index do
   use OrbitWeb, :live_view
 
   alias Orbit.Boards
-  alias Orbit.Boards.Cards
+  alias Orbit.Boards.Card
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :cards_collection, list_cards())}
+    {:ok, assign(socket, :cards, list_cards())}
   end
 
   @impl true
@@ -16,28 +16,28 @@ defmodule OrbitWeb.CardsLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Cards")
-    |> assign(:cards, Boards.get_cards!(id))
+    |> assign(:page_title, "Edit Card")
+    |> assign(:card, Boards.get_card!(id))
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Cards")
-    |> assign(:cards, %Cards{})
+    |> assign(:page_title, "New Card")
+    |> assign(:card, %Card{})
   end
 
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Cards")
-    |> assign(:cards, nil)
+    |> assign(:card, nil)
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    cards = Boards.get_cards!(id)
-    {:ok, _} = Boards.delete_cards(cards)
+    card = Boards.get_card!(id)
+    {:ok, _} = Boards.delete_card(card)
 
-    {:noreply, assign(socket, :cards_collection, list_cards())}
+    {:noreply, assign(socket, :cards, list_cards())}
   end
 
   defp list_cards do

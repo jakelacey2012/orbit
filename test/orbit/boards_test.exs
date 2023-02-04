@@ -112,56 +112,56 @@ defmodule Orbit.BoardsTest do
   end
 
   describe "cards" do
-    alias Orbit.Boards.Cards
+    alias Orbit.Boards.Card
 
     import Orbit.BoardsFixtures
 
     @invalid_attrs %{title: nil}
 
     test "list_cards/0 returns all cards" do
-      cards = cards_fixture()
-      assert Boards.list_cards() == [cards]
+      card = card_fixture()
+      assert Boards.list_cards() == [card]
     end
 
-    test "get_cards!/1 returns the cards with given id" do
-      cards = cards_fixture()
-      assert Boards.get_cards!(cards.id) == cards
+    test "get_card!/1 returns the card with given id" do
+      card = card_fixture()
+      assert Boards.get_card!(card.id) == card
     end
 
-    test "create_cards/1 with valid data creates a cards" do
+    test "create_card/1 with valid data creates a card" do
       valid_attrs = %{title: "some title"}
 
-      assert {:ok, %Cards{} = cards} = Boards.create_cards(valid_attrs)
-      assert cards.title == "some title"
+      assert {:ok, %Card{} = card} = Boards.create_card(valid_attrs)
+      assert card.title == "some title"
     end
 
-    test "create_cards/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Boards.create_cards(@invalid_attrs)
+    test "create_card/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Boards.create_card(@invalid_attrs)
     end
 
-    test "update_cards/2 with valid data updates the cards" do
-      cards = cards_fixture()
+    test "update_card/2 with valid data updates the card" do
+      card = card_fixture()
       update_attrs = %{title: "some updated title"}
 
-      assert {:ok, %Cards{} = cards} = Boards.update_cards(cards, update_attrs)
-      assert cards.title == "some updated title"
+      assert {:ok, %Card{} = card} = Boards.update_card(card, update_attrs)
+      assert card.title == "some updated title"
     end
 
-    test "update_cards/2 with invalid data returns error changeset" do
-      cards = cards_fixture()
-      assert {:error, %Ecto.Changeset{}} = Boards.update_cards(cards, @invalid_attrs)
-      assert cards == Boards.get_cards!(cards.id)
+    test "update_card/2 with invalid data returns error changeset" do
+      card = card_fixture()
+      assert {:error, %Ecto.Changeset{}} = Boards.update_card(card, @invalid_attrs)
+      assert card == Boards.get_card!(card.id)
     end
 
-    test "delete_cards/1 deletes the cards" do
-      cards = cards_fixture()
-      assert {:ok, %Cards{}} = Boards.delete_cards(cards)
-      assert_raise Ecto.NoResultsError, fn -> Boards.get_cards!(cards.id) end
+    test "delete_card/1 deletes the card" do
+      card = card_fixture()
+      assert {:ok, %Card{}} = Boards.delete_card(card)
+      assert_raise Ecto.NoResultsError, fn -> Boards.get_card!(card.id) end
     end
 
-    test "change_cards/1 returns a cards changeset" do
-      cards = cards_fixture()
-      assert %Ecto.Changeset{} = Boards.change_cards(cards)
+    test "change_card/1 returns a card changeset" do
+      card = card_fixture()
+      assert %Ecto.Changeset{} = Boards.change_card(card)
     end
   end
 end

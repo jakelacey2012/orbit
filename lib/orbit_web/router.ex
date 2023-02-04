@@ -77,25 +77,24 @@ defmodule OrbitWeb.Router do
 
     live "/boards", BoardLive.Index, :index
     live "/boards/new", BoardLive.Index, :new
-    live "/boards/:id/edit", BoardLive.Index, :edit
+    live "/boards/:board_id/edit", BoardLive.Index, :edit
 
-    live "/boards/:id", BoardLive.Show, :show
-    live "/boards/:id/show/edit", BoardLive.Show, :edit
+    live "/boards/:board_id", BoardLive.Show, :show
+    live "/boards/:board_id/show/edit", BoardLive.Show, :edit
 
-    # This needs to be under board
-    live "/columns", ColumnLive.Index, :index
-    live "/columns/new", ColumnLive.Index, :new
-    live "/columns/:id/edit", ColumnLive.Index, :edit
+    live "/boards/:board_id/columns", ColumnLive.Index, :index
+    live "/boards/:board_id/columns/new", ColumnLive.Index, :new
+    live "/boards/:board_id/columns/:column_id/edit", ColumnLive.Index, :edit
 
-    live "/columns/:id", ColumnLive.Show, :show
-    live "/columns/:id/show/edit", ColumnLive.Show, :edit
+    live "/boards/:board_id/columns/:column_id", ColumnLive.Show, :show
+    live "/boards/:board_id/columns/:column_id/show/edit", ColumnLive.Show, :edit
 
-    live "/cards", CardsLive.Index, :index
-    live "/cards/new", CardsLive.Index, :new
-    live "/cards/:id/edit", CardsLive.Index, :edit
+    live "/boards/:board_id/columns/:column_id/cards", CardLive.Index, :index
+    live "/boards/:board_id/columns/:column_id/cards/new", CardLive.Index, :new
+    live "/boards/:board_id/columns/:column_id/cards/:id/edit", CardLive.Index, :edit
 
-    live "/cards/:id", CardsLive.Show, :show
-    live "/cards/:id/show/edit", CardsLive.Show, :edi
+    live "/boards/:board_id/columns/:column_id/cards/:id", CardLive.Show, :show
+    live "/boards/:board_id/columns/:column_id/cards/:id/show/edit", CardLive.Show, :edit
 
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings", UserSettingsController, :update

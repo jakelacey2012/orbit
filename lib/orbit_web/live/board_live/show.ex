@@ -9,11 +9,12 @@ defmodule OrbitWeb.BoardLive.Show do
   end
 
   @impl true
-  def handle_params(%{"id" => id}, _, socket) do
+  def handle_params(%{"board_id" => board_id}, _, socket) do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:board, Boards.get_board!(id))}
+     |> assign(:board, Boards.get_board!(board_id))
+     |> assign(:columns, Boards.list_columns(board_id))}
   end
 
   defp page_title(:show), do: "Show Board"
